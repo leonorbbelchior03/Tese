@@ -1,0 +1,56 @@
+# =============================================================
+# Global parameters. Change values HERE, never inside the code.
+# =============================================================
+
+seed: 42
+
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  synthetic: data/synthetic
+  figures: reports/figures
+  tables: reports/tables
+
+# ---------- Valid ranges (used by the QC / schema) ----------
+ranges:
+  pasi: [0, 72]
+  bsa: [0, 100]
+  dlqi: [0, 30]
+  bmi: [12, 70]
+  age: [18, 100]
+
+# ---------- Treatment levels ----------
+# 1 = topical, 2 = phototherapy, 3 = conventional systemic / oral small molecule, 4 = biologic
+levels:
+  topical: 1
+  phototherapy: 2
+  conventional_systemic: 3
+  oral_small_molecule: 3
+  anti_tnf: 4
+  anti_il12_23: 4
+  anti_il17: 4
+  anti_il23: 4
+
+# ---------- Model 1: therapeutic escalation ----------
+model1:
+  # Open decision (to confirm with supervisor): does phototherapy count as escalation?
+  phototherapy_counts_as_escalation: false
+  horizons_days: [182, 365]        # 6 and 12 months
+  baseline_lookback_days: 28       # baseline visit may be up to 4 weeks before T0
+
+# ---------- Model 2: treatment response ----------
+model2:
+  min_level: 3                     # population: starts of systemic / targeted therapy
+  baseline_lookback_days: 28
+  window_tolerance_weeks: 4        # follow-up visit accepted at window +/- tolerance
+  window_source: primary           # 'primary' (SmPC) or 'sensitivity' (NICE)
+  primary_endpoint: pasi90
+  dlqi_mcid: 4                     # sensitivity analysis: 5
+  # Patients who stop for lack of efficacy before the window count as non-responders
+  stop_for_inefficacy_is_failure: true
+
+# ---------- Validation ----------
+cv:
+  n_splits: 5
+  n_repeats: 10

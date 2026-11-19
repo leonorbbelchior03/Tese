@@ -1,0 +1,8 @@
+pandas>=2.1
+numpy>=1.26
+scikit-learn>=1.4
+pandera>=0.20
+matplotlib>=3.8
+pyyaml>=6.0
+jupyter
+pytest>=8.0

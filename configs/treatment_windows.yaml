@@ -1,0 +1,45 @@
+# =============================================================
+# Assessment window (weeks) for treatment response, by drug.
+# primary     = SmPC stopping rule (point where non-response leads to reconsidering treatment)
+# sensitivity = NICE assessment timeline (biologics) or earlier guideline timepoint
+# Sources:
+#   [BAD]  BAD guidelines for biologic therapy for psoriasis 2023 - posology table
+#          (SmPC stopping rules + NICE timelines)
+#   [SmPC] EMA product information, section 4.2
+#   [EGD]  EuroGuiDerm guideline on systemic treatment of psoriasis vulgaris (Nast et al.)
+#   [AAD]  Joint AAD-NPF guidelines, systemic non-biologic therapies (Menter et al., JAAD 2020)
+# Decided BEFORE looking at outcome data. Do not change after seeing results.
+# =============================================================
+
+class_defaults:
+  conventional_systemic: {primary: 24, sensitivity: 16, source: "EGD"}
+  oral_small_molecule:   {primary: 24, sensitivity: 16, source: "SmPC"}
+  anti_tnf:              {primary: 16, sensitivity: 12, source: "BAD"}
+  anti_il12_23:          {primary: 28, sensitivity: 16, source: "BAD"}
+  anti_il17:             {primary: 16, sensitivity: 12, source: "BAD"}
+  anti_il23:             {primary: 16, sensitivity: 16, source: "BAD"}
+
+drugs:
+  # Conventional systemic
+  methotrexate:    {class: conventional_systemic, primary: 24, sensitivity: 16, source: "EGD (slower onset, up to 24 wk)"}
+  ciclosporin:     {class: conventional_systemic, primary: 16, sensitivity: 12, source: "EGD (fast onset, up to 16 wk)"}
+  acitretin:       {class: conventional_systemic, primary: 24, sensitivity: 16, source: "AAD (max response 3-6 months)"}
+  # Oral small molecules
+  apremilast:      {class: oral_small_molecule, primary: 24, sensitivity: 16, source: "SmPC 4.2"}
+  deucravacitinib: {class: oral_small_molecule, primary: 24, sensitivity: 16, source: "SmPC 4.2"}
+  # Anti-TNF
+  adalimumab:      {class: anti_tnf, primary: 16, sensitivity: 16, source: "BAD (SmPC 16 / NICE 16)"}
+  certolizumab:    {class: anti_tnf, primary: 16, sensitivity: 16, source: "BAD (SmPC 16 / NICE 16)"}
+  etanercept:      {class: anti_tnf, primary: 12, sensitivity: 12, source: "BAD (SmPC 12 / NICE 12)"}
+  infliximab:      {class: anti_tnf, primary: 14, sensitivity: 10, source: "BAD (SmPC 14 / NICE 10)"}
+  # Anti-IL-12/23
+  ustekinumab:     {class: anti_il12_23, primary: 28, sensitivity: 16, source: "BAD (SmPC 28 / NICE 16)"}
+  # Anti-IL-17
+  secukinumab:     {class: anti_il17, primary: 16, sensitivity: 12, source: "BAD (SmPC 16 / NICE 12)"}
+  ixekizumab:      {class: anti_il17, primary: 16, sensitivity: 12, source: "BAD (SmPC 16-20 / NICE 12)"}
+  brodalumab:      {class: anti_il17, primary: 12, sensitivity: 12, source: "BAD (SmPC 12-16 / NICE 12)"}
+  bimekizumab:     {class: anti_il17, primary: 16, sensitivity: 16, source: "BAD (SmPC 16 / NICE 16)"}
+  # Anti-IL-23
+  guselkumab:      {class: anti_il23, primary: 16, sensitivity: 16, source: "BAD (SmPC 16 / NICE 16)"}
+  risankizumab:    {class: anti_il23, primary: 16, sensitivity: 16, source: "BAD (SmPC 16 / NICE 16)"}
+  tildrakizumab:   {class: anti_il23, primary: 28, sensitivity: 12, source: "BAD (SmPC 28 / NICE 12-28)"}

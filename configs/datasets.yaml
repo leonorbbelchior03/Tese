@@ -1,0 +1,29 @@
+# Column mapping for each data source -> common format.
+# Fill in the 'kruczek_il17' block after opening the Mendeley files.
+
+fictitious:
+  path: data/synthetic/fictitious
+
+kruczek_il17:
+  path: data/raw/external/kruczek_il17/FILE_NAME.xlsx   # TODO
+  sheet: 0                                              # TODO
+  columns:                                              # TODO: replace with the real column names
+    patient_id: "ID"
+    sex: "Sex"
+    age: "Age"
+    bmi: "BMI"
+    disease_duration_years: "Disease duration"
+    psa: "PsA"
+    drug: "Drug"
+    pasi_w0: "PASI 0"
+    pasi_w4: "PASI 4"
+    pasi_w12: "PASI 12"
+    bsa_w0: "BSA 0"
+    bsa_w4: "BSA 4"
+    bsa_w12: "BSA 12"
+    dlqi_w0: "DLQI 0"
+    dlqi_w4: "DLQI 4"
+    dlqi_w12: "DLQI 12"
+  # how the dataset codes the values -> our codes
+  sex_map: {"M": "M", "F": "F"}
+  drug_map: {"bimekizumab": "bimekizumab", "ixekizumab": "ixekizumab", "secukinumab": "secukinumab"}
