@@ -10,6 +10,7 @@ from src.data.schemas import SCHEMAS
 from pandera.errors import SchemaErrors
 
 
+
 def schema_issues(tables: dict) -> pd.DataFrame:
     """Values out of range, wrong categories, wrong types, duplicated ids."""
     rows = []
